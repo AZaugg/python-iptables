@@ -420,6 +420,7 @@ class IPTCModule(object):
         res.reverse()
         inv = False
         while len(res) > 0:
+            key = None
             x = res.pop()
             if x == '!':
                 # Next parameter is negated.
@@ -433,7 +434,8 @@ class IPTCModule(object):
                     params[key] = []
                 inv = False
                 continue
-            params[key].append(x)  # This is a parameter value.
+            if key:
+                params[key].append(x)  # This is a parameter value.
         return params
 
     def _update_parameters(self):
